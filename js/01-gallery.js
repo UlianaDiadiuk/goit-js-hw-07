@@ -39,4 +39,11 @@ function onImageClick(e) {
   );
 
   instance.show();
+
+  document.addEventListener("keydown", (e) => {
+    e.preventDefault();
+    if (e.code === "Escape") {
+      instance.close();
+    }
+  });
 }
