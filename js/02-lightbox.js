@@ -23,31 +23,11 @@ function createGallery(galleryItems) {
     .join("");
 }
 
-gallery.addEventListener("click", onImageClick);
 
-// Lightbox function
-function lightBox(e) {
-  let lightbox = new SimpleLightbox(".gallery a", {
-    captionsData: "alt",
-    captionPosition: "bottom",
-    captionDelay: 250,
-  });
 
-  lightbox.on("show.simplelightbox", function () {});
+let lightBox = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionPosition: "bottom",
+  captionDelay: 250,
+});
 
-  lightbox.on("error.simplelightbox", function (e) {
-    console.log(e);
-  });
-}
-
-// Click function
-function onImageClick(e) {
-  e.preventDefault();
-
-  if (e.target.tagName !== "IMG") {
-    return;
-  }
-
-  lightBox(e);
-  getCaption(e);
-}

@@ -31,19 +31,29 @@ function onImageClick(e) {
   if (e.target.tagName !== "IMG") {
     return;
   }
+  
   const fullSizeImage = e.target.getAttribute("data-source");
+
+
   const instance = basicLightbox.create(
     `<div class="modal">
        <img src = "${fullSizeImage}" />
-    </div>`
-  );
+    </div>`, {
+    onShow: (instance) => {document.addEventListener('keydown', modalClose)},
+    onClose: (instance) => { document.removeEventListener('keydown', modalClose)}
+  })
 
   instance.show();
 
-  document.addEventListener("keydown", (e) => {
-    e.preventDefault();
+  gallery.addEventListener('keydown', modalClose);
+  
+ function modalClose(e) {
     if (e.code === "Escape") {
+      document.removeEventListener("keydown", e);
       instance.close();
-    }
-  });
+   }
 }
+};
+
+
+
